@@ -2,11 +2,9 @@
 
 "만들면서 배우는 러스트 프로그래밍" 책으로 공부하는 Rust 언어
 
-<img src="F:\Season4\rust_study\Rust_Book_Study\assets\book_img" alt="만들면서 배우는 러스트 프로그래밍 - 예스24" style="zoom: 25%;" />
+<img src="..\assets\book_img" alt="만들면서 배우는 러스트 프로그래밍 - 예스24" style="zoom: 25%;" />
 
 이미지 출처 : YES24
-
-
 
 ## Chapter 01
 
@@ -26,8 +24,6 @@ println("hello, world"); // 오류 발생
 
 !가 붙는 것은 러스트 매크로를 뜻한다.
 
-
-
 show_price.rs
 
 - 변수를 문자열에 대입해서 출력
@@ -36,8 +32,6 @@ show_price.rs
 let banana = 300; // 값을 변수에 바인딩한다.
 println!("바나나가격{}", banana);
 ```
-
-
 
 moon.rs
 
