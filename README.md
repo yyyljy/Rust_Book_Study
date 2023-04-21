@@ -108,3 +108,27 @@ for i in 1..10 {
 ```
 
 csv 형식으로 구구단 출력. 맨 끝에는 , 가 붙지 않게
+
+
+
+fibo.rs
+
+- 변수 선언
+
+```rust
+let mut a = 1; // 변수는 기본적으로 불변(immutable)으로 선언되며 mut를 붙여야 가변(mutable)
+for _ in 0..30 { // 인덱스 없이 반복 _
+    println!("{}", a + b);
+}
+```
+
+
+
+coin_type.rs
+
+- let 변수명: 타입 = 값;
+
+```rust
+let count500: i64 = 10;
+```
+
