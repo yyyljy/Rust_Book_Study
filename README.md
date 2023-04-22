@@ -132,3 +132,169 @@ coin_type.rs
 let count500: i64 = 10;
 ```
 
+
+
+caesar_enc.rs
+
+```rust
+fn encrypt(text: &str, shift: i16) -> String {
+    let code_a = 'A' as i16;
+    let code_z = 'Z' as i16;
+
+    let mut result = String::new();
+
+    for ch in text.chars() {
+        let mut code = ch as i16;
+        if code_a <= code && code <= code_z {
+            code = (code - code_a + shift + 26) % 26 + code_a;
+        }
+        result.push((code as u8) as char);
+    }
+    return result;
+}
+
+fn main() {
+    let enc = encrypt("I LOVE RUST", 3);
+    let dec = encrypt(&enc, -3);
+    println!("{} => {}", enc, dec);
+}
+```
+
+- 매개변수 타입 지정
+- 함수 반환 타입 지정
+- 자료형변환
+- 문자열 변수 선언
+- string -> char 배열
+- 문자형 변수 매개변수 사
+
+prime100.rs
+
+```rust
+fn get_primes(primes: &mut[usize; 100]) { // 100개의 usize 타입 배열 가변 매개변수
+    let mut i = 2;
+    let mut count = 0;
+    while count < 100 {
+        if is_prime(i) {
+            primes[count] = i;
+            count += 1;
+        }
+        i += 1;
+    }
+}
+
+fn main() {
+    let mut primes = [0; 100]; // 초기값이 0이고, 100개의 요소를 가진 배열
+    get_primes(&mut primes); // 가변 배열 변수를 매개변수로 전달
+    println!("{:?}", primes); // 배열형 변수 출력
+    // println!("{:#?}", primes); // 줄바꿈 출력
+}
+```
+
+
+
+sum1to10v2.rs
+
+```rust
+for i in 1..=10 { // 1,2,..10 까지 실행되는 반복문
+	total += i;
+}
+```
+
+
+
+sum1to10vec.rs
+
+```rust
+let nums = vec![1,2,3,4,5,6,7,8,9,10]; // Vector. 배열 요소 수 변경 가능한 가변 크기 배열
+```
+
+
+
+if_value.rs
+
+```rust
+let check_even_odd = if n % 2 == 0 {"짝수"} else {"홀수"};
+// let check_even_odd2 = (n % 2 == 0) ? "짝수" : "홀수";
+```
+
+- RUST에는 삼항연산자가 존재하지 않는 대신 변수 선언문에서 if else를 사용할 수 있다.
+
+
+
+## Chapter 02
+
+"hello"
+
+```bash
+cargo new hello
+cargo build
+cargo run
+...
+cargo --help
+```
+
+- cargo new hello
+  - hello 라는 이름으로 프로젝트 생성
+- cargo run
+  - build 후에 run
+
+
+
+"pow1234_5678"
+
+Cargo.toml - dependencies에 필요한 라이브러리(크레이트 Crate)를 입력
+
+```rust
+use num_bigint::BigInt;
+
+fn main() {
+    let v = BigInt::from(1234);
+    println!("{}", v.pow(5678));
+}
+```
+
+
+
+"dice"
+
+Cargo.toml
+
+```
+[dependencies]
+rand = "0.8.0"
+```
+
+```rust
+use rand::Rng;
+fn main() {
+    let mut rng = rand::thread_rng();
+    for _ in 0..5 {
+        let dice = rng.gen_range(1..=6); // 1 ~ 6 사이 랜덤 숫자 생성
+        println!("{}", dice);
+    }
+}
+```
+
+```rust
+let r = 3..15;
+println!("{}..{}", r.start, r.end);
+// 3..15
+```
+
+
+
+"maze"
+
+```rust
+const MAP_N: usize = 25;
+let mut maze = [[0; MAP_N]; MAP_N]; // 이차원 배열 선언, 초기값 0
+
+match r { // r 값에 따른 분기 처리 방법
+     0 => maze[y-1][x] = 1,
+     1 => maze[y+1][x] = 1,
+     2 => maze[y][x-1] = 1,
+     3 => maze[y][x+1] = 1,
+     _ => {},
+}
+```
+
