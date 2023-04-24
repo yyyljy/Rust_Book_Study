@@ -298,3 +298,41 @@ match r { // r 값에 따른 분기 처리 방법
 }
 ```
 
+
+
+"bingocard"
+
+```rust
+use rand::seq::SliceRandom;
+let mut nums = [0; 75];
+for i in 1..=75 { nums[i-1] = i; }
+
+let mut rng = rand::thread_rng();
+nums.shuffle(&mut rng); // 배열 섞기
+```
+
+
+
+"vec_nomacro.rs"
+
+```rust
+let mut nums = Vec::new(); // vec![1,2,3] 처럼 vec! 매크로를 쓰지 않고 벡터 선언하는 방법
+nums.push(1);
+```
+
+
+
+"vec_u32_str.rs"
+
+```rust
+let a_vec: Vec<u32> = vec![100,200,300];
+for i in a_vec {
+	println!("{}",i);
+}
+
+let s_vec: Vec<&str> = vec!["개","고양이","닭"];
+for i in s_vec {
+	println!("{}",i);
+}
+```
+
