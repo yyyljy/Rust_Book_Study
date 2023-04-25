@@ -336,3 +336,93 @@ for i in s_vec {
 }
 ```
 
+
+
+"bmi.rs"
+
+```rust
+let bmi = weight / height.powf(2.0); // 실수의 제곱
+println!("BMI={:.1}", bmi); // 소수점 첫째자리까지 표현
+
+fn input(prompt: &str) -> f64 { // 키보드 입력 받는 함수
+    println!("{}", prompt);
+    let mut s = String::new();
+    std::io::stdin().read_line(&mut s).expect("입력 에러"); // 에러 발생시 메세지 출력
+    return s.trim().parse().expect("숫자가 아닙니다."); // 타입추론으로 parse()가 f64를 반환
+}
+```
+
+
+
+"str_parse.rs"
+
+```rust
+let num = s.parse::<f64>().expect("변환 실패"); // 형변환
+```
+
+
+
+Result 타입 처리
+
+```rust
+let s = "3.1415a";
+let num = s.parse::<f64>();
+match num {
+	Ok(result) => println!("{:2}", result),
+	Err(e) => println!("에러가 발생했습니다. 이유 : '{:?}'", e)
+}
+```
+
+
+
+"input_height.rs"
+
+```rust
+loop {
+    println!("키(cm) : ");
+    height = input_f(0.0);
+    if height > 0.0 { break; }
+    println!("숫자만 입력 가능");
+}
+```
+
+```rust
+let i: i32 = match s.unwrap(); // 오류 발생 시 에러처리 생략 (프로그램 종료)
+```
+
+
+
+"int_type.rs"
+
+```rust
+fn main() {
+    let a = 100u8;
+    let b = 100i128;
+    let c = 10_000; // 10000과 똑같은 값. 보기 편하게
+}
+```
+
+
+
+```rust
+let a = 'a';
+let b = b'a'; // ASCII 코드 97u8
+let c = '\x61'; // 16진수로 문자 'a'
+println!("{}, {:2x}, {}",a,b,c);
+
+let d = '곰';
+let e = '곰' as u32;
+let f = '\u{acf0}'; // 16진수
+println!("{}, {:4x}, {}",d, e, f);
+
+let v1 = 0xFF; // 16진수
+let v2 = 0o655; // 8진수
+let v3 = 0b1101_0101; // 2진수
+println!("{}, {}, {}", v1, v2, v3);
+
+let f1 = 10.5; // 부동 소수점 숫자 리터럴
+let f2 = 10.5f32; // f32 부동 소수점
+let f3 = 10.5e+8; // 1050000000
+println!("{}, {}, {}", f1, f2, f3);
+```
+
