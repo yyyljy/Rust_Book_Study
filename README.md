@@ -426,3 +426,44 @@ let f3 = 10.5e+8; // 1050000000
 println!("{}, {}, {}", f1, f2, f3);
 ```
 
+
+
+"counter.rs"
+
+```rust
+use std::collections::HashMap;
+let mut c_map = HashMap::new(); // HashMap 생성
+c_map.insert("A", 0); // HashMap 데이터 삽입
+
+for k in ["A","B","C"] {
+    println!("{}: {:>2}", k, c_map[k]); // 2칸 기준 오른쪽 정렬
+}
+```
+
+
+
+"korean_month.rs"
+
+```rust
+let mut months_map: HashMap<&str, usize> = HashMap::new(); // HashMap 타입지정 선언
+for (i,v) in months.iter().enumerate() { // for 문에서 index와 value`
+	months_map.insert(v, i+1);
+}
+if months_map.get("초코달달") == None { // Map에 존재하는 키인지 확인 (존재하면 Some 반환)
+    println!("초코달달은 존재하지 않음")
+} else {
+    println!{"초코달달={}", months_map["초코달달"]};
+}
+```
+
+
+
+"hashmap_match.rs"
+
+```rust
+match map.get("C") { // match를 이용해 Option 타입 분기로 map에 키값 존재 유무 컨트롤
+	Some(v) => println!("C={}", v);
+	None => println!("C는 존재하지 않음");
+}
+```
+
