@@ -467,3 +467,70 @@ match map.get("C") { // match를 이용해 Option 타입 분기로 map에 키값
 }
 ```
 
+
+
+"sum_args.rs"
+
+```rust
+let args = std::env::args(); // 명령줄에 인수 받기
+
+for (i, s) in args.enumerate() {
+    if i == 0 { continue; }
+
+    let num: f64 = match s.parse() {
+        Ok(v) => v,
+        Err(_) => 0.0,
+    };
+    total += num;
+}
+```
+
+
+
+"print_args.rs"
+
+```rust
+use std::env;
+
+fn main() {
+    let args = env::args();
+    for arg in args {
+        println!("{}", arg);
+    }
+}
+```
+
+"print_args_vec.rs"
+
+```rust
+fn main() {
+    let args:Vec<String> = std::env::args().collect();
+    println!("{:?}", args);
+}
+```
+
+
+
+"read_file.rs"
+
+```rust
+use std::env;
+use std::fs;
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    if args.len() < 2 {
+        println!("읽어올 파일을 지정해주세요.");
+        return;
+    }
+
+    let filename = &args[1];
+    let text = match fs::read_to_string(filename) { // 파일 읽기
+        Ok(v) => v,
+        Err(e) => e.to_string()
+    };
+    println!("{}",text);
+}
+```
+
