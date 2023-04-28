@@ -586,3 +586,64 @@ fn main() {
 }
 ```
 
+
+
+"fizzbuzz_filename2.rs"
+
+```rust
+use std::fs::File;
+use std::io::Write;
+
+fn main() {
+    let filename = "fizzbuzz_file2_result.txt";
+    let data = get_fizzbuzz(100);
+    
+    let mut fp = File::create(filename).unwrap();
+
+    let bytes = data.as_bytes();
+    fp.write_all(bytes).unwrap(); // 한 번에 파일 쓰기
+}
+
+fn get_fizzbuzz(max: u32) -> String {
+    let mut result = String::new();
+
+    for i in 1..=max {
+        if (i % 3 == 0) && (i % 5 == 0) {
+            result += "FizzBuzz\n";
+        } else if i % 3 == 0 {
+            result += "Fizz\n";
+        } else if i % 5 == 0 {
+            result += "Buzz\n";
+        } else {
+            result += &format!("{}\n", i);
+        }
+    }
+    result
+}
+```
+
+
+
+파일 에러 처리 방법들
+
+```rust
+let text = fs::read_to_string("something.txt").unwrap(); // 에러 시 강제종료
+
+let text1 = fs::read_to_string("something.txt").unwrap_or("실패 값".to_string());
+
+let text2 = match fs::read_to_string("something.txt") {
+    Ok(text) => {
+        text // 정상 값 반환
+    },
+    Err(e) => {
+        // 에러 처리
+    }
+}
+
+if let Ok(s) = fs::read_to_string("somefile.txt") {
+    // 성공시 처리
+} else {
+    // 에러시 처리
+}
+```
+
