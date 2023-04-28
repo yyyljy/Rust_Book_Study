@@ -534,3 +534,55 @@ fn main() {
 }
 ```
 
+
+
+- 실행 결과 파일 출력
+
+```shell
+./fizzbuzz > ./fizzbuzz_rust.txt
+```
+
+
+
+"dictionary.rs"
+
+```rust
+use std::fs::File;
+use std::io::{BufRead, BufReader};
+
+let dicfile = "dict.txt";
+let fp = File::open(dicfile).unwrap(); // 파일 열기
+let reader = BufReader::new(fp); // 파일 읽기
+```
+
+
+
+"fizzbuzz_filename.rs"
+
+```rust
+use std::fs::{self, File};
+use std::io::{Write, BufWriter};
+
+fn main() {
+    let filename = "fizzbuzz_file_result.txt";
+    {
+        let fp = File::create(filename).unwrap();
+        let mut writer = BufWriter::new(fp);
+
+        for i in 1..=100 {
+            let mut line = format!{"{}\n", i};
+            if (i % 3 == 0) && (i % 5 == 0) {
+                line = String::from("FizzBuzz\n");
+            } else if i % 3 == 0 {
+                line = String::from("Fizz\n");
+            } else if i % 5 == 0 {
+                line = String::from("Buzz\n");
+            }
+
+            let bytes = line.as_bytes();
+            writer.write(bytes).unwrap(); // 한 줄씩 파일에 쓰기
+        }
+    }
+}
+```
+
