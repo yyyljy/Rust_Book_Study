@@ -662,3 +662,34 @@ fn main() {
 }
 ```
 
+
+
+재귀함수 사용 파일 탐색 "findfile.rs"
+
+```rust
+fn findfile(target: &path::PathBuf, keyword: &str) {
+    let files = target.read_dir().expect("존재하지 않는 경로");
+    for dir_entry in files {
+        let path = dir_entry.unwrap().path();
+        if path.is_dir() {
+            findfile(&path, keyword);
+            continue;
+        }
+
+        let fname = path.file_name().unwrap().to_string_lossy();
+        if None == fname.find(keyword) { continue; }
+        println!("{}", path.to_string_lossy());
+    }
+}
+```
+
+
+
+unwrap_or
+
+```rust
+let value = 매서드().unwrap();
+let value = 메서드().unwrap_or(인수 값);
+let value = 메서드().unwrap_or_else(클로저);
+```
+
