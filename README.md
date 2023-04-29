@@ -624,7 +624,7 @@ fn get_fizzbuzz(max: u32) -> String {
 
 
 
-파일 에러 처리 방법들
+파일 에러 처리 방법
 
 ```rust
 let text = fs::read_to_string("something.txt").unwrap(); // 에러 시 강제종료
@@ -644,6 +644,21 @@ if let Ok(s) = fs::read_to_string("somefile.txt") {
     // 성공시 처리
 } else {
     // 에러시 처리
+}
+```
+
+
+
+재귀함수
+
+```rust
+fn sum(n:i32) -> i32 {
+    if n <= 0 {return 0;}
+    return sum(n-1) + n ;
+}
+
+fn main() {
+    println!("{}", sum(10));
 }
 ```
 
