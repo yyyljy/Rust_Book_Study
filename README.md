@@ -693,3 +693,26 @@ let value = 메서드().unwrap_or(인수 값);
 let value = 메서드().unwrap_or_else(클로저);
 ```
 
+
+
+tree
+
+```rust
+fn tree(target: &path::PathBuf, level: isize) {
+    let files = target.read_dir().expect("존재하지 않는 경로입니다.");
+    for ent in files {
+        let path = ent.unwrap().path();
+        for _ in 1..=level {
+            print!("|   ");
+        }
+        let fname = path.file_name().unwrap().to_string_lossy();
+        if path.is_dir() {
+            println!("|-- <{}>", fname);
+            tree(&path, level+1);
+            continue;
+        }
+        println!("|-- {}", fname);
+    }
+}
+```
+
