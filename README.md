@@ -716,3 +716,111 @@ fn tree(target: &path::PathBuf, level: isize) {
 }
 ```
 
+
+
+## Chapter03
+
+소유권
+
+```rust
+fn main() {
+    let g1 = String::from("온화한 마음은 몸에 좋다.");
+    let g2 = g1; // 값 소유권 이동
+    println!("{}", g2);
+    println!("{}", g1); // 소유권이 없어서 오류 발생
+}
+```
+
+```rust
+fn main() {
+    let g1 = 30;
+    let g2 = g1; // 정수, 부동 소수점 등의 숫자 타입, Boolean 타입 등은 소유권 이동 X
+    // 힙 : 임의의 순서로 메모리 확보, 해제 가능
+    // 스택 : 순차적(마지막 메모리부터) 메모리 확보 및 해제 가능
+    // 기본 타입 데이터는 크기가 정해져 있어서 스택 영역에 저장되어 있음.
+    println!("{}", g1); // 정상
+    println!("{}", g2); // 정상
+}
+```
+
+```rust
+let g1 = String::from("온화한 마음은 몸에 좋다.");
+let g2 = g1.clone(); // .clone() 소유권 이동 x
+```
+
+```rust
+fn main() {
+    let g1 = String::from("실수할 줄 아는 사람이 아름답다");
+    show_msg(g1); // 함수 호출에 따른 소유권 이동
+    println!("{}",g1); // 오류 발생
+}
+
+fn show_msg(msg: String) {
+    println!("{}", msg);
+}
+```
+
+```rust
+fn main() {
+    let mut g1 = String::from("실수할 줄 아는 사람이 아름답다");
+    g1 = show_msg(g1); // 함수 호출에 따른 소유권 이동 후 반환
+    println!("{}",g1); // 정상
+}
+
+fn show_msg(msg: String) -> String {
+    println!("{}", msg);
+    msg // 소유권 반환
+}
+```
+
+```rust
+fn main() {
+    let g1 = String::from("실수할 줄 아는 사람이 아름답다");
+    show_msg(&g1); // 소유권 빌리(borrow)
+    println!("{}",g1); // 정상
+}
+
+fn show_msg(msg: &String) { // 소유권 빌림 (borrow)
+    println!("{}", msg);
+}
+```
+
+```rust
+fn add_qoute(msg: &mut String) { // 가변 참조자를 인수로 사용
+    msg.insert(0, '"');
+    msg.push('"');
+}
+
+fn main() {
+    let mut msg = String::from("건강한 신체에 건강한 정신이 깃든다.");
+    println!("{}",msg);
+    add_qoute(&mut msg); // 가변 참조자 전달
+    println!("{}",msg);
+}
+```
+
+```rust
+fn p2(arg: &mut i32) {
+    *arg = *arg + 2;
+}
+
+fn main() {
+    let mut v = 16;
+    p2(&mut v);
+    println!("{}", v);
+}
+```
+
+```rust
+fn main() {
+    let year = 2023;
+    let month = 12;
+    let day = 1;
+    println!("KR:{0}/{1}/{2}", year, month, day);
+    println!("US:{1}/{2}/{0}", year, month, day);
+    println!("UK:{2}/{1}/{0}", year, month, day);
+    println!("{yy}년 {mm}월 {dd}일", yy=year, mm=month, dd=day);
+}
+```
+
+- 출력 서식 지정 : p205 참고
