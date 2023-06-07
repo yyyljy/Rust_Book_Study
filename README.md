@@ -856,3 +856,75 @@ fn print_and_sum_items(items: &Vec<Item>) -> i64 {
 }
 ```
 
+
+
+array
+
+```rust
+fn main() {
+    let points:[i32;5] = [10, 20, 40 ,50 ,60]; // 스택 영역에 메모리 확보
+    // 배열 선언 후 크기 변경 불가
+    print_array(&points);
+    array_get(1, &points);
+}
+
+fn print_array(e: &[i32;5]) {
+    println!("{:?}",e);
+    println!("len={}", e.len());
+}
+ 
+fn array_get(i: usize, arr:&[i32]) {
+    println!("{} = {:?}", i, &arr[i]);
+}
+```
+
+
+
+slice
+
+```rust
+fn main() {
+    let s = String::from("beep");
+    let ss = &s[0..3]; // 0번 index 부터 3번 index 전까지
+    println!("{}", ss); // bee  [0,1,2]
+    println!("{}", s); // 소유권 갖고 있기 때문에 출력 가능
+    let sss = &s[2..4];
+    println!("{}", sss); // ep  [2,3]
+}
+```
+
+
+
+struct
+
+```rust
+struct CarSpec {
+    model: i32,
+    cc: i32,
+    color: i32,
+}
+
+fn main() {
+    let car1 = CarSpec {
+        model: 3333,
+        cc: 1500,
+        color: 0xFF0000,
+    };
+    println!("car1: {}, {}cc, {:06x}", car1.model, car1.cc, car1.color);
+    println!("{:06x}",get_car_color(&car1));
+}
+
+fn get_car_color(car: &CarSpec) -> i32 {
+    car.color
+}
+```
+
+
+
+rust 명명 규칙
+
+카멜 방식						: CamelCase		: 구조체, 타입, 열거형, 타입 매개변수
+
+스네이크 방식(소문자)	: snake_case		: 크레이트, 모듈, 함수, 메서드, 지역 변수
+
+스네이크 방식(대문자)	: SNAKE_CASE	: 상수, 고정 변수
