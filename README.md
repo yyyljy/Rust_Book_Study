@@ -928,3 +928,28 @@ rust 명명 규칙
 스네이크 방식(소문자)	: snake_case		: 크레이트, 모듈, 함수, 메서드, 지역 변수
 
 스네이크 방식(대문자)	: SNAKE_CASE	: 상수, 고정 변수
+
+
+
+string
+
+```rust
+fn main() {
+    let s = "안녕하세여";
+    let ch = s.chars().nth(0).unwrap(); // 안
+    println!("{}", ch);
+
+    let ch = s.chars().nth(2).unwrap(); // 하
+    println!("{}", ch);
+    
+    let s2 = "abcdefg";
+    println!("{}", &s2[0..1]); // a
+
+    let ch = &s[..3];
+    println!("{}", ch); // 안
+
+    let ch = &s[6..9];
+    println!("{}", ch); // 하
+}
+```
+
