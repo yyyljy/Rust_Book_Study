@@ -953,3 +953,83 @@ fn main() {
 }
 ```
 
+
+
+string find
+
+```rust
+fn main() {
+    let s = format!("{}{}", "There is more happiness in giving ",
+                            "than there is in receiving.");
+
+    let res = s.find(|c:char| c.to_ascii_uppercase() == 'S');
+    match res {
+        Some(i) => println!("S={}B", i), // 7B
+        None => println!("None"),
+    };
+
+    let s = "제주도의 특산물 중 귤은 겨울에 많이 먹을 수 있다.";
+
+    match s.find('귤') {
+        Some(i) => println!("귤 = {}B", i), // 27B
+        None => println!("'귤'이라는 단어는 없습니다."),
+    };
+}
+```
+
+
+
+string replace
+
+```rust
+let s = "내 자신에 대한 자신감을 잃으면 온 세상이 나의 적이 된다.";
+let s2 = s.replace("잃으면", "가지면");
+```
+
+
+
+string split
+
+```rust
+let telno = "955-3658";
+
+println!("--슬라이스--");
+println!("국번: {}", &telno[..3]);
+println!("사번: {}", &telno[4..]);
+
+println!("--split_at--");
+let (telno1, telno2) = telno.split_at(3);
+let (telno2, telno3) = telno2.split_at(1);
+println!("국번: {}", telno1);
+println!("구분: {}", telno2); // -
+println!("사번: {}", telno3);
+
+println!("--split_off--");
+let mut telno1 = String::from(telno);
+let mut telno2 = telno1.split_off(3);
+let telno3 = telno2.split_off(1);
+println!("국번: {}", telno1);
+println!("구분: {}", telno2); // -
+println!("사번: {}", telno3);
+
+println!("--split--");
+let telno_a: Vec<&str> = telno.split("-").collect();
+println!("국번: {}", telno_a[0]);
+println!("사번: {}", telno_a[1]);
+```
+
+
+
+string file  encode
+
+```rust
+Cargo.toml
+[dependencies]
+encoding_rs = "0.8.28"
+
+main.rs
+use encoding_rs;
+
+let (enc, _, _) = encoding_rs::EUC_KR.decode(&buf);
+```
+
